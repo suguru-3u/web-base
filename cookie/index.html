@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input-text">
+    <button onclick="cookieRequest()">Cookieボタン</button>
+    <div>
+        <label>検索結果</label><p id="session-result"></p>
+    </div>
+    <script>
+        function cookieRequest(){
+            const inputText = document.getElementById("input-text")
+            console.log("入力内容の確認",inputText.value)
+            const params = {sessionValue : inputText.value};
+            const query = new URLSearchParams(params);
+            fetchRequest(query)
+        }
+        async function fetchRequest(query){
+            try{
+                await fetch(`http://localhost:3000/session?${query}`)
+            }catch(e){
+                console.log("エラー発生",e)
+            }
+        }
+    </script>
+</body>
+</html>
